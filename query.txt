@@ -1,12 +1,15 @@
 1 - 	SELECT * 
 	FROM `students` 
 	WHERE `date_of_birth` BETWEEN '1990-01-01' AND '1990-12-31';
+	WHERE YEAR(`date_of_birth`) = 1990;
 2 - 	SELECT * 
 	FROM `courses` 
 	WHERE `cfu` > 10;
 3 - 	SELECT * 
 	FROM `students` 
 	WHERE `date_of_birth`<= '1991-12-31';
+	WHERE (YEAR(CURRENT_DATE) - YEAR(`date_of_birth`)) > 30 ;
+	WHERE TIMESTAMPDIFF(YEAR,`date_of_birth`,CURDATE()) > 30;
 4 - 	SELECT * 
 	FROM `courses` 
 	WHERE `period` = 'I semestre' AND `year` = 1;

@@ -1,0 +1,37 @@
+1 - 	SELECT `students`.`id` AS `id_studente` , `students`.`name` AS `name` , `students`.`surname` AS `surname` , `degrees`.`name` AS `corso_di_laurea`
+	FROM `students`
+	JOIN `degrees` ON `students`.`degree_id` = `degrees`.`id`
+	WHERE `degrees`.`name` = 'corso di laurea in economia'
+2 - 	SELECT `degrees`.`name` AS `corso_di_laurea` , `departments`.`name` AS `dipartimento`
+	FROM `degrees` 
+	JOIN `departments` ON `degrees`.`department_id` = `departments`.`id`
+	WHERE `departments`.`name` = 'Dipartimento di Neuroscienze'
+3 - 	SELECT `courses`.`name` AS `nome_corso`
+	FROM `courses` 
+	JOIN `course_teacher` ON `courses`.`id` = `course_teacher`.`course_id`
+	JOIN `teachers` ON `course_teacher`.`teacher_id` = `teachers`.`id`
+	WHERE `teachers`.`id` = '44';
+4 - 	SELECT `students`.`surname` AS `cognome` , `students`.`name` AS `nome` , `degrees`.`name` AS `corso_di_laurea` , `degrees`.`level` AS `livello` , `degrees`.`address` AS `indirizzo` , `departments`.`name`
+	FROM `students`
+	JOIN `degrees` ON `students`.`degree_id` = `degrees`.`id`
+	JOIN `departments` ON `degrees`.`department_id` = `departments`.`id`
+	ORDER BY `cognome`;
+5 - 	SELECT `degrees`.`name` AS `corso_di_laurea` , `courses`.`name` `nome_corso` , `teachers`.`name` `nome` , `teachers`.`surname` AS `cognome`
+	FROM `degrees` 
+	JOIN `courses` ON `degrees`.`id` = `courses`.`degree_id`
+	JOIN `course_teacher` ON `courses`.`id` = `course_teacher`.`course_id`
+	JOIN `teachers` ON `course_teacher`.`teacher_id` = `teachers`.`id`;
+6 - 	SELECT DISTINCT `teachers`.`name` AS `nome` , `teachers`.`surname` AS `cognome` , `departments`.`name` AS `nome_dipartimento` 
+	FROM `teachers` 
+	JOIN `course_teacher` ON `teachers`.`id` = `course_teacher`.`teacher_id`
+	OIN `courses` ON `course_teacher`.`course_id` = `courses`.`id`
+	JOIN `degrees` ON `courses`.`degree_id` = `degrees`.`id`
+	JOIN `departments` ON `degrees`.`department_id` = `departments`.`id`
+	WHERE `departments`.`name` = 'Dipartimento di Matematica'
+	ORDER BY `cognome`
+7 - 	SELECT COUNT(`exam_student`.`vote`) AS `tentativi_esame_falliti` , `students`.`surname` AS `cognome`
+	FROM `students`
+	JOIN `exam_student` ON `students`.`id` = `exam_student`.`student_id`
+	JOIN `exams` ON `exams`.`id` = `exam_student`.`exam_id`
+	WHERE `exam_student`.`vote` < 18
+	GROUP BY `cognome` 

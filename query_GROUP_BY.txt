@@ -1,0 +1,14 @@
+1 - 	SELECT COUNT(*) AS `studenti_iscritti`, YEAR(`enrolment_date`) AS `anno_iscrizione`
+	FROM `students` 
+	GROUP BY `anno_iscrizione`;
+2 - 	SELECT COUNT(*) AS `insegnanti`, `office_address` AS `indirizzo_ufficio`
+	FROM `teachers` 
+	GROUP BY `indirizzo_ufficio`;
+3 - 	SELECT ROUND(AVG(`exam_student`.`vote`)) AS `media_esame` , `exams`.`date` AS `data_esame`
+	FROM `exam_student` 
+	JOIN `exams` ON `exam_student`.`exam_id` = `exams`.`id`
+	GROUP BY `data_esame`;
+4 - 	SELECT COUNT(*) AS `corsi_di_laurea` , `departments`.`name` AS `nome_dipartimento`
+	FROM `degrees`
+	JOIN `departments` ON `degrees`.`department_id` = `departments`.`id`
+	GROUP BY `nome_dipartimento`;
